@@ -11,7 +11,7 @@ const createUserController = (req, res) => {
   res.status(201).send({ user });
 };
 
-const findUserByIdController = (req, res) => {
+const getUserController = (req, res) => {
   const { id } = req.params;
   const user = findUserById(id);
 
@@ -22,7 +22,7 @@ const findUserByIdController = (req, res) => {
   res.send({ user });
 };
 
-const deleteUserByIdController = (req, res) => {
+const deleteUserController = (req, res) => {
   const { id } = req.params;
   deleteUserById(id);
 
@@ -32,7 +32,7 @@ const deleteUserByIdController = (req, res) => {
   res.status(204).send();
 };
 
-const updateUserByIDController = (req, res) => {
+const updateUserController = (req, res) => {
   const { id } = req.params;
   const user = req.body;
   const updatedUser = updateUserById(id, user);
@@ -46,7 +46,7 @@ const updateUserByIDController = (req, res) => {
 
 module.exports = {
   createUserController,
-  findUserByIdController,
-  deleteUserByIdController,
-  updateUserByIDController,
+  getUserController,
+  deleteUserController,
+  updateUserController,
 };
