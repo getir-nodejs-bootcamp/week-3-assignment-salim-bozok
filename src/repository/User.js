@@ -1,3 +1,5 @@
+const bcrypt = require("bcryptjs");
+
 // we keep the users in memory
 const users = [];
 
@@ -16,6 +18,10 @@ const insertUser = (user) => {
 // if the user doesn't exist, return undifined
 const findUserById = (id) => {
   return users.find((user) => user.id === id);
+};
+
+const findUserByEmail = (email) => {
+  return users.find((user) => user.email === email);
 };
 
 const deleteUserById = (id) => {
@@ -51,6 +57,7 @@ const comparePassword = (plainPassword, hashedPassword) => {
 module.exports = {
   insertUser,
   findUserById,
+  findUserByEmail,
   deleteUserById,
   updateUserByID,
   comparePassword,
