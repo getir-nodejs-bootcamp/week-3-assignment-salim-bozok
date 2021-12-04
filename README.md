@@ -88,4 +88,4 @@ curl --location --request GET 'localhost:4000/users' \
 
 <br />
 
-© Salim Bozok ([GitHub](https://github.com/nebisin) - [Linkedin](https://www.linkedin.com/in/salimbozok/) - <salimbozok@outlook.com>)
+**Contact**: Salim Bozok ([GitHub](https://github.com/nebisin) - [Linkedin](https://www.linkedin.com/in/salimbozok/) - <salimbozok@outlook.com>)
