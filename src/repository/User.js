@@ -31,13 +31,14 @@ const deleteUserById = (id) => {
   );
 };
 
-const updateUserByID = (id, updatedUser) => {
+const updateUserById = (id, updatedUser) => {
   const user = findUserById(id);
   if (user) {
     user.name = updatedUser.name || user.name;
     user.email = updatedUser.email || user.email;
     user.password = hashPassword(updatedUser.password) || user.password;
   }
+
   return user;
 };
 
@@ -59,6 +60,6 @@ module.exports = {
   findUserById,
   findUserByEmail,
   deleteUserById,
-  updateUserByID,
+  updateUserById,
   comparePassword,
 };

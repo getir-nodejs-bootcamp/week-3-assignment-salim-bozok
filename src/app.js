@@ -2,11 +2,16 @@
 require("dotenv").config();
 
 const express = require("express");
+const logger = require("./middlewares/logger");
+const { prepareLogFile } = require("./utils/logger");
+
+prepareLogFile();
 
 const port = process.env.PORT || 4000;
 
 const app = express();
 app.use(express.json());
+app.use(logger);
 
 app.get("/", (req, res) => {
   res.send({ status: "ok" });

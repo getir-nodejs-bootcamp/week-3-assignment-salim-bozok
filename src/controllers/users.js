@@ -2,11 +2,14 @@ const {
   insertUser,
   findUserById,
   deleteUserById,
+  updateUserById,
   comparePassword,
 } = require("../repository/User");
 
 const createUserController = (req, res) => {
   const { name, email, password } = req.body;
+
+  // TODO: Validate user data before inserting
   const user = insertUser({ name, email, password });
 
   // we dont want to send the password back to the client
@@ -56,6 +59,8 @@ const deleteUserController = (req, res) => {
 const updateUserController = (req, res) => {
   const id = req.userID;
   const user = req.body;
+
+  // TODO: Validate user data before updating
   const updatedUser = updateUserById(id, user);
 
   if (!updatedUser) {
