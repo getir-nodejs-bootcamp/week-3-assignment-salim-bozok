@@ -1,20 +1,19 @@
 const fs = require("fs");
 
 const prepareLogFile = () => {
-  // Eğer mevcut değilse, log.json dosyasını oluşturacağız
+  // Create log.json file if it doesn't exist
   fs.open("log.json", "wx", (err, fd) => {
-    // race condition'a yol açabileceğinden dosyanın erişilebilir olup olmadığını
-    // kontrol etmek için `fs.access()` kullanılması tavsiye edilmiyor.
+    // we don't use ft.access because it might cause race condition
     if (err) {
-      // log.json dosyasının mevcut olup olmadığını kontrol ediyoruz
+      // check whether or not log.json file is exist
       if (err.code === "EEXIST") {
-        // eğer dosya mevcutsa doğrudan return ediyoruz
+        // if the file already exist return immediately
         return;
       }
       console.log("something went wrong while opening the log.json file", err);
     }
 
-    // eğer log.json dosyası mevcut değilse oluşturuyoruz
+    // create log.json file if it doesn't exist
     fs.writeFile(fd, "[]", (err) => {
       fs.close(fd);
       if (err) {
@@ -28,6 +27,7 @@ const prepareLogFile = () => {
   });
 };
 
+// pushNewLog read the current file and push the new log to the file
 function pushNewLog(newLog) {
   fs.readFile("log.json", "utf-8", (err, data) => {
     if (err) {

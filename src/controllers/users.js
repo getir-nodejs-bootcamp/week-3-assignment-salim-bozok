@@ -43,7 +43,7 @@ const getUserController = (req, res) => {
     return res.status(404).send({ error: "User not found" });
   }
 
-  res.send({ user });
+  res.status(200).send({ user });
 };
 
 const deleteUserController = (req, res) => {
@@ -67,7 +67,7 @@ const updateUserController = (req, res) => {
     return res.status(404).send({ error: "User not found" });
   }
 
-  res.send({ user: updatedUser });
+  res.status(200).send({ user: updatedUser });
 };
 
 module.exports = {
