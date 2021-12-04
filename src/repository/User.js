@@ -36,7 +36,10 @@ const updateUserById = (id, updatedUser) => {
   if (user) {
     user.name = updatedUser.name || user.name;
     user.email = updatedUser.email || user.email;
-    user.password = hashPassword(updatedUser.password) || user.password;
+  }
+
+  if (updatedUser.password) {
+    user.password = hashPassword(updatedUser.password);
   }
 
   return user;

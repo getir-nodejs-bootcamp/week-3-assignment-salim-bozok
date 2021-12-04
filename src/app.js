@@ -19,6 +19,10 @@ app.get("/", (req, res) => {
 
 app.use("/users", require("./routes/userRoutes"));
 
+app.use(function (req, res, next) {
+  res.status(404).send({ error: "Not found" });
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

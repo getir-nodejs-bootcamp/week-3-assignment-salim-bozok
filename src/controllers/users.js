@@ -1,9 +1,12 @@
+const jwt = require("jsonwebtoken");
+
 const {
   insertUser,
   findUserById,
   deleteUserById,
   updateUserById,
   comparePassword,
+  findUserByEmail,
 } = require("../repository/User");
 
 const createUserController = (req, res) => {
@@ -11,9 +14,6 @@ const createUserController = (req, res) => {
 
   // TODO: Validate user data before inserting
   const user = insertUser({ name, email, password });
-
-  // we dont want to send the password back to the client
-  delete user.password;
 
   res.status(201).send({ user });
 };
@@ -26,7 +26,7 @@ const loginUserController = (req, res) => {
     return res.status(400).send({ error: "Invalid email or password" });
   }
 
-  if (comparePassword(password, user.password)) {
+  if (!comparePassword(password, user.password)) {
     return res.status(400).send({ error: "Invalid email or password" });
   }
 
@@ -36,7 +36,7 @@ const loginUserController = (req, res) => {
 };
 
 const getUserController = (req, res) => {
-  const id = req.userID;
+  const id = req.payload.id;
   const user = findUserById(id);
 
   if (!user) {
@@ -47,7 +47,7 @@ const getUserController = (req, res) => {
 };
 
 const deleteUserController = (req, res) => {
-  const id = req.userID;
+  const id = req.payload.id;
   deleteUserById(id);
 
   // It doesn't matter if the user was deleted or
@@ -57,7 +57,7 @@ const deleteUserController = (req, res) => {
 };
 
 const updateUserController = (req, res) => {
-  const id = req.userID;
+  const id = req.payload.id;
   const user = req.body;
 
   // TODO: Validate user data before updating
