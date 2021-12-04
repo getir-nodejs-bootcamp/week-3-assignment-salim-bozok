@@ -31,6 +31,12 @@ PORT=4000
 JWT_SECRET=supersecretcode
 ```
 
+4. Start the server
+
+```
+npm run start
+```
+
 4. Create new user
 
 ```
