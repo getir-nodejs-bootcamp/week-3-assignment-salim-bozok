@@ -7,12 +7,18 @@ const {
   updateUserById,
   comparePassword,
   findUserByEmail,
+  validateUserInput,
 } = require("../repository/User");
 
 const createUserController = (req, res) => {
   const { name, email, password } = req.body;
 
-  // TODO: Validate user data before inserting
+  // Validate user data before inserting
+  let errors = validateUserInput({ name, email, password }, true);
+  if (errors.length > 0) {
+    return res.status(400).json({ errors: errors });
+  }
+
   const user = insertUser({ name, email, password });
 
   res.status(201).send({ user });
@@ -60,7 +66,12 @@ const updateUserController = (req, res) => {
   const id = req.payload.id;
   const user = req.body;
 
-  // TODO: Validate user data before updating
+  // Validate user data before updating
+  let errors = validateUserInput(user, false);
+  if (errors.length > 0) {
+    return res.status(400).json({ errors: errors });
+  }
+
   const updatedUser = updateUserById(id, user);
 
   if (!updatedUser) {

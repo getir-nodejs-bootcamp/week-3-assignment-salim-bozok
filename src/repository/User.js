@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const validator = require("validator");
 
 // we keep the users in memory
 const users = [];
@@ -58,6 +59,39 @@ const comparePassword = (plainPassword, hashedPassword) => {
   return bcrypt.compareSync(plainPassword, hashedPassword);
 };
 
+const validateUserInput = (user, isNew) => {
+  let errors = [];
+
+  if (!user.email) {
+    // When updating a user, the email is not required
+    if (isNew) {
+      errors.push({ email: "Email is required" });
+    }
+  } else if (!validator.isEmail(user.email)) {
+    errors.push({ email: "Email is invalid" });
+  }
+
+  if (!user.password) {
+    // When updating a user, the password is not required
+    if (isNew) {
+      errors.push({ password: "Password is required" });
+    }
+  } else if (user.password.length < 8) {
+    errors.push({ password: "Password must be at least 8 characters" });
+  }
+
+  if (!user.name) {
+    // When updating a user, the name is not required
+    if (isNew) {
+      errors.push({ name: "Name is required" });
+    }
+  } else if (user.name.length < 3) {
+    errors.push({ name: "Name must be at least 3 characters" });
+  }
+
+  return errors;
+};
+
 module.exports = {
   insertUser,
   findUserById,
@@ -65,4 +99,5 @@ module.exports = {
   deleteUserById,
   updateUserById,
   comparePassword,
+  validateUserInput,
 };

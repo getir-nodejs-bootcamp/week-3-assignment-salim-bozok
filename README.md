@@ -37,7 +37,7 @@ JWT_SECRET=supersecretcode
 npm run start
 ```
 
-4. Create new user
+5. Create new user
 
 ```
 curl --location --request POST 'localhost:4000/users' \
@@ -49,7 +49,7 @@ curl --location --request POST 'localhost:4000/users' \
 }'
 ```
 
-5. Sign in to your account
+6. Sign in to your account
 
 ```
 curl --location --request POST 'localhost:4000/users/auth' \
@@ -60,14 +60,14 @@ curl --location --request POST 'localhost:4000/users/auth' \
 }'
 ```
 
-6. If you want to get user information send this request with jwt token that given to you by the server
+7. If you want to get user information send this request with jwt token that given to you by the server
 
 ```
 curl --location --request GET 'localhost:4000/users' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM4NjQxNzQxfQ.lF8_jlzMZFadtnIP0WX844thGZ3PNCLRc7LR-_c8ZVY'
 ```
 
-7. If you want to play around here are the other endpoints
+8. If you want to play around here are the other endpoints
 
    a. Update User
 
@@ -83,7 +83,7 @@ curl --location --request GET 'localhost:4000/users' \
    Host: localhost:4000
    ```
 
-8. For seeing the logs that saved by the server go to the log.json file in the root directory
+9. For seeing the logs that saved by the server go to the log.json file in the root directory
    ![An example of the log.json file](./example_log_file.png)
 
 <br />
